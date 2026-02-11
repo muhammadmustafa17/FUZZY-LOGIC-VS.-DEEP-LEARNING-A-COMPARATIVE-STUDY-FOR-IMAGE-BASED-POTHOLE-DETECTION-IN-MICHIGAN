@@ -1,0 +1,64 @@
+[System]
+Name='PotholeFIS_final'
+Type='mamdani'
+Version=2.0
+NumInputs=4
+NumOutputs=1
+NumRules=11
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='Intensity'
+Range=[0 1]
+NumMFs=3
+MF1='Dark':'trapmf',[0 0 0.25 0.45]
+MF2='Medium':'trimf',[0.3 0.5 0.7]
+MF3='Bright':'trapmf',[0.55 0.75 1 1]
+
+[Input2]
+Name='Contrast'
+Range=[0 1]
+NumMFs=3
+MF1='Low':'trapmf',[0 0 0.25 0.4]
+MF2='Medium':'trimf',[0.3 0.5 0.7]
+MF3='High':'trapmf',[0.6 0.75 1 1]
+
+[Input3]
+Name='Edges'
+Range=[0 1]
+NumMFs=3
+MF1='Low':'trapmf',[0 0 0.25 0.4]
+MF2='Medium':'trimf',[0.3 0.5 0.7]
+MF3='High':'trapmf',[0.6 0.75 1 1]
+
+[Input4]
+Name='Shape'
+Range=[0 1]
+NumMFs=2
+MF1='Elongated':'trapmf',[0 0.1 0.4 0.7]
+MF2='Round':'trapmf',[0.5 0.7 0.9 1]
+
+[Output1]
+Name='Score'
+Range=[0 1]
+NumMFs=3
+MF1='Low':'trimf',[0 0 0.3]
+MF2='Medium':'trimf',[0.2 0.5 0.8]
+MF3='High':'trimf',[0.6 1 1]
+
+[Rules]
+1 3 3 2, 3 (1) : 1
+1 3 3 1, 3 (0.8) : 1
+1 3 2 2, 3 (0.7) : 1
+1 2 3 2, 3 (0.7) : 1
+2 3 3 2, 3 (0.6) : 1
+1 2 2 2, 2 (1) : 1
+2 2 2 2, 2 (1) : 1
+3 1 1 0, 1 (1) : 1
+0 1 0 0, 1 (0.8) : 1
+0 0 1 0, 1 (0.8) : 1
+3 0 0 1, 1 (0.8) : 1
